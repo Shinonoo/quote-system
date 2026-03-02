@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const db = require('./db');
+const { pool } = require('./config/database');
 const authRoutes = require('./routes/auth');
 const quoteRoutes = require('./routes/quotes');
 const authenticateToken = require('./middleware/auth_middleware');
@@ -32,7 +32,7 @@ app.use('/api/quotes', authenticateToken, quoteRoutes);
 // DB health check
 app.get('/api/test', async (req, res, next) => {
   try {
-    const [rows] = await db.query('SELECT 1 + 1 AS solution');
+    const [rows] = await pool.query('SELECT 1 + 1 AS solution');
     res.json({ success: true, message: 'DB Connected!', result: rows[0].solution });
   } catch (err) {
     next(err); // passes to error middleware

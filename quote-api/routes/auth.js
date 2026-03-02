@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const db = require('../db');
+const { pool } = require('../config/database');
 require('dotenv').config();
 
 const router = express.Router();
@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Insert into database
-        const [result] = await db.query(
+        const [result] = await pool.query(
             'INSERT INTO users (username, password_hash) VALUES (?, ?)', 
             [username, hashedPassword]
         );
@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
 
     try {
         // Find user in database
-        const [users] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+        const [users] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
         
         if (users.length === 0) {
             return res.status(401).json({ error: 'Invalid username or password' });
