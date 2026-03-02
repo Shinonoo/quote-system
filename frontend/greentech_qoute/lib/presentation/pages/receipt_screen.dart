@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:printing/printing.dart';
-import '../services/api_client.dart';
-import '../services/api_exception.dart';
-import '../utils/error_handler.dart';
-import '../utils/quote_pdf_generator.dart';
+import '../../data/datasources/remote_data_source.dart';  // Fixed path
+import '../../core/errors/api_exception.dart';
+import '../../utils/error_handler.dart';
+import '../../utils/quote_pdf_generator.dart';
 
 class ReceiptScreen extends StatefulWidget {
   final dynamic quoteNo;

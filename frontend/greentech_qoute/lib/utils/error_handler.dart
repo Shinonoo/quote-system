@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/api_exception.dart';
+import '../core/errors/api_exception.dart';
 
 void handleError(BuildContext context, Object error) {
   String message;

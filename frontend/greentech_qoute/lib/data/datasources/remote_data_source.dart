@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'api_exception.dart';
+import '../../core/errors/api_exception.dart';
 
 class ApiClient {
   static const String baseUrl = 'http://localhost:3000/api';

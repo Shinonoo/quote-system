@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'screens/login_screen.dart';
-import 'screens/home_screen.dart';
+import 'presentation/pages/login_screen.dart';
+import 'presentation/pages/home_screen.dart';
 import 'utils/colors.dart';
 
 void main() async {

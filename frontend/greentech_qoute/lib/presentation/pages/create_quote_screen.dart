@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../services/api_client.dart';
-import '../services/api_exception.dart';
-import '../utils/error_handler.dart';
-import '../constants/app_colors.dart';
-import '../widgets/add_item_form.dart';
-import 'home_screen.dart';
+import '../../data/datasources/remote_data_source.dart';
+import '../../core/errors/api_exception.dart';
+import '../../utils/error_handler.dart';
+import '../../constants/app_colors.dart';
+import '../widgets/quote/add_item_form.dart';
+import 'home_screen.dart';  // Same folder now
 
 class CreateQuoteScreen extends StatefulWidget {
   const CreateQuoteScreen({Key? key}) : super(key: key);
