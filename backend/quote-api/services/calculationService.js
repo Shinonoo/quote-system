@@ -30,13 +30,15 @@ class CalculationService {
     let customizationCosts = 0;
     
     if (customizations) {
-      if (customizations.insect_screen) multiplier *= parseFloat(customizations.insect_screen);
-      if (customizations.bird_screen) multiplier *= parseFloat(customizations.bird_screen);
+      // Handle various customization key formats
+      if (customizations.insect_screen || customizations.insect) multiplier *= parseFloat(customizations.insect_screen || customizations.insect);
+      if (customizations.bird_screen || customizations.bird) multiplier *= parseFloat(customizations.bird_screen || customizations.bird);
       if (customizations.obvd) multiplier *= parseFloat(customizations.obvd);
-      if (customizations.radial_damper) multiplier *= parseFloat(customizations.radial_damper);
-      if (customizations.double_frame) multiplier *= parseFloat(customizations.double_frame);
-      if (customizations.powder_coat) {
-        customizationCosts += parseFloat(customizations.powder_coat?.price ?? 500);
+      if (customizations.radial_damper || customizations.radial) multiplier *= parseFloat(customizations.radial_damper || customizations.radial);
+      if (customizations.double_frame || customizations.doubleFrame) multiplier *= parseFloat(customizations.double_frame || customizations.doubleFrame);
+      if (customizations.powder_coat || customizations.powder) {
+        const powderValue = customizations.powder_coat || customizations.powder;
+        customizationCosts += parseFloat(powderValue?.price ?? powderValue ?? 500);
       }
     }
 

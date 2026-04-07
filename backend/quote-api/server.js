@@ -15,9 +15,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// In server.js — add BEFORE routes
+// Debug: Log all requests (must be before routes to capture them)
 app.use((req, res, next) => {
-  console.log('AUTH HEADER:', req.headers['authorization']);
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
   next();
 });
 
@@ -28,6 +28,11 @@ app.use('/api/auth', authRoutes);
 
 // Protected — JWT required
 app.use('/api/quotes', authenticateToken, quoteRoutes);
+
+// Debug: Simple ping endpoint (no auth required)
+app.get('/api/ping', (req, res) => {
+  res.json({ success: true, message: 'pong', timestamp: new Date().toISOString() });
+});
 
 // DB health check
 app.get('/api/test', async (req, res, next) => {
@@ -41,6 +46,7 @@ app.get('/api/test', async (req, res, next) => {
 
 // 404 handler — catches any unmatched routes
 app.use((req, res, next) => {
+  console.log(`[404] Route not found: ${req.method} ${req.originalUrl}`);
   res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found.` });
 });
 
