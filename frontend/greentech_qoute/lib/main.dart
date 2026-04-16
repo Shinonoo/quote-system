@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
-import 'data/providers/auth_provider.dart';
-import 'data/services/api_client.dart';
-import 'ui/pages/login_page.dart';
-import 'ui/pages/quote_list_page.dart';
+import 'features/auth/providers/auth_provider.dart';
+import 'core/network/api_client.dart';
+import 'features/auth/views/login_page.dart';
+import 'features/quotes/views/pages/quote_list_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,9 +45,10 @@ class _AppStartupPageState extends State<AppStartupPage> {
   }
 
   Future<void> _initializeApp() async {
+    final auth = context.read<AuthProvider>(); 
     try {
       await ApiClient().initialize();
-      await context.read<AuthProvider>().initialize();
+      await auth.initialize();
     } catch (e, stackTrace) {
       debugPrint('❌ App initialization error: $e');
       debugPrint('Stack trace: $stackTrace');
